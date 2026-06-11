@@ -1,3 +1,338 @@
-<html>
-<head></head>
-<body> sito HedgeVane </body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hedgevane — Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0f;
+      color: #f0ede8;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hv-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hv-aurora {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hv-aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.13;
+    }
+
+    .hv-aurora-blob.a {
+      width: 500px; height: 500px;
+      background: #e879b0;
+      top: -160px; right: -60px;
+    }
+
+    .hv-aurora-blob.b {
+      width: 420px; height: 420px;
+      background: #5dcaa5;
+      top: -80px; right: 180px;
+      opacity: 0.09;
+    }
+
+    .hv-aurora-blob.c {
+      width: 360px; height: 360px;
+      background: #7f77dd;
+      bottom: -80px; left: -60px;
+      opacity: 0.1;
+    }
+
+    .hv-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hv-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .hv-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #5dcaa5;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.65); }
+    }
+
+    .hv-eyebrow-text {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.35);
+    }
+
+    .hv-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .hv-logo-img {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .hv-wordmark {
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(105deg, #f0ede8 0%, #c8f0e0 40%, #e879b0 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hv-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(93,202,165,0.2) 0%, rgba(232,121,176,0.15) 60%, transparent 100%);
+      margin: 28px 0 32px;
+    }
+
+    .hv-headline {
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(240,237,232,0.42);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .hv-headline strong {
+      color: rgba(240,237,232,0.82);
+      font-weight: 500;
+    }
+
+    .hv-form-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.25);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .hv-input-row {
+      display: flex;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color 0.2s;
+    }
+
+    .hv-input-row:focus-within {
+      border-color: rgba(93,202,165,0.35);
+    }
+
+    .hv-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #f0ede8;
+      min-width: 0;
+    }
+
+    .hv-input::placeholder { color: rgba(240,237,232,0.2); }
+
+    .hv-btn {
+      background: linear-gradient(105deg, #5dcaa5, #9b7fe8);
+      color: #fff;
+      border: none;
+      padding: 13px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.15s;
+    }
+
+    .hv-btn:hover { opacity: 0.88; }
+    .hv-btn:active { opacity: 0.72; }
+
+    .hv-btn svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .hv-meta {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 20px;
+    }
+
+    .hv-from {
+      font-size: 11px;
+      color: rgba(240,237,232,0.18);
+      letter-spacing: 0.05em;
+    }
+
+    .hv-from span {
+      color: rgba(240,237,232,0.38);
+      font-weight: 500;
+    }
+
+    .hv-waitlist {
+      font-size: 11px;
+      color: rgba(240,237,232,0.2);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hv-waitlist-count {
+      font-weight: 600;
+      background: linear-gradient(105deg, #5dcaa5, #c07be8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 13px;
+    }
+
+    .hv-avatars { display: flex; }
+
+    .hv-av {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #0a0a0f;
+      margin-left: -6px;
+    }
+
+    .hv-av:first-child { margin-left: 0; }
+    .hv-av.g1 { background: linear-gradient(135deg, #5dcaa5, #1d9e75); }
+    .hv-av.g2 { background: linear-gradient(135deg, #9b7fe8, #534ab7); }
+    .hv-av.g3 { background: linear-gradient(135deg, #e879b0, #993556); }
+    .hv-av.g4 { background: linear-gradient(135deg, #7fc9e8, #185fa5); }
+  </style>
+</head>
+<body>
+
+  <div class="hv-grid"></div>
+  <div class="hv-aurora">
+    <div class="hv-aurora-blob a"></div>
+    <div class="hv-aurora-blob b"></div>
+    <div class="hv-aurora-blob c"></div>
+  </div>
+
+  <div class="hv-inner">
+
+    <div class="hv-eyebrow">
+      <div class="hv-dot"></div>
+      <span class="hv-eyebrow-text">Coming soon</span>
+    </div>
+
+    <div class="hv-logo-row">
+      <img src="hedgevane.png" class="hv-logo-img" alt="Hedgevane logo" />
+      <span class="hv-wordmark">hedgevane</span>
+    </div>
+
+    <div class="hv-divider"></div>
+
+    <p class="hv-headline">
+      Something is being built.<br>
+      <strong>Something that changes the way you read markets.</strong><br>
+      From the Logwer team — the people behind the tools you already rely on.
+    </p>
+
+    <label class="hv-form-label" for="hv-email">Get early access</label>
+    <div class="hv-input-row">
+      <input
+        id="hv-email"
+        class="hv-input"
+        type="email"
+        placeholder="your@email.com"
+        autocomplete="email"
+      />
+      <button class="hv-btn">
+        Notify me
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+
+    <div class="hv-meta">
+      <a href="https://logwer.com"><span class="hv-from">A <span>Logwer</span> product</span></a>
+      <div class="hv-waitlist">
+        <div class="hv-avatars">
+          <div class="hv-av g1"></div>
+          <div class="hv-av g2"></div>
+          <div class="hv-av g3"></div>
+          <div class="hv-av g4"></div>
+        </div>
+        <span class="hv-waitlist-count">113</span>
+        <span>already waiting</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
